@@ -1,0 +1,23 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 400" role="img" aria-label="A maxi taxi at a roadside stop with students and the Northern Range behind">
+<defs><linearGradient id="sky" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#7cc4f0"/><stop offset="1" stop-color="#fde9b0"/></linearGradient></defs>
+<rect width="640" height="400" fill="url(#sky)"/>
+<circle cx="520" cy="80" r="42" fill="#ffc300"/>
+<path d="M0 250 L90 150 L160 210 L250 120 L350 220 L440 140 L540 215 L640 160 V300 H0Z" fill="#2f8f6b"/>
+<path d="M0 270 L110 190 L200 245 L300 180 L420 250 L520 195 L640 250 V310 H0Z" fill="#1a936f"/>
+<rect y="300" width="640" height="100" fill="#14213d"/>
+<path d="M0 352h640" stroke="#ffc300" stroke-width="6" stroke-dasharray="44 26"/>
+<rect y="292" width="640" height="14" fill="#d9d2c2"/>
+<g transform="translate(70 120)"><rect x="0" y="0" width="8" height="180" fill="#6b4f2a"/><path d="M4 8 C-40 -10 -50 30 -30 40 M4 8 C48 -10 60 30 40 40 M4 8 C-20 -30 30 -30 20 -5 M4 8 C-30 0 -10 -25 4 8" stroke="#1a936f" stroke-width="12" fill="none" stroke-linecap="round"/></g>
+<g transform="translate(150 190)"><rect x="0" y="0" width="6" height="110" fill="#14213d"/><rect x="-26" y="-4" width="58" height="34" rx="5" fill="#d7263d"/><text x="3" y="19" text-anchor="middle" font-family="Arial" font-weight="700" font-size="13" fill="#fff">STOP</text></g>
+<g transform="translate(205 100)">
+<rect x="0" y="40" width="340" height="120" rx="22" fill="#fff"/>
+<path d="M0 118h340v22H0z" fill="#ffc300"/><path d="M0 140h340v10H0z" fill="#d7263d"/>
+<rect x="22" y="58" width="58" height="42" rx="6" fill="#bcd0e6"/><rect x="92" y="58" width="58" height="42" rx="6" fill="#bcd0e6"/><rect x="162" y="58" width="58" height="42" rx="6" fill="#bcd0e6"/><rect x="232" y="58" width="58" height="42" rx="6" fill="#bcd0e6"/>
+<path d="M300 58h24a14 14 0 0 1 14 14v28h-38z" fill="#9fc0de"/>
+<circle cx="125" cy="80" r="9" fill="#8d5a3b"/><circle cx="195" cy="80" r="9" fill="#c98a5e"/><circle cx="265" cy="80" r="9" fill="#6b4226"/>
+<rect x="104" y="90" width="42" height="10" rx="4" fill="#2b6cb0"/><rect x="174" y="90" width="42" height="10" rx="4" fill="#1a936f"/><rect x="244" y="90" width="42" height="10" rx="4" fill="#d7263d"/>
+<rect x="132" y="22" width="76" height="22" rx="6" fill="#14213d"/><text x="170" y="38" text-anchor="middle" font-family="Arial" font-weight="700" font-size="13" fill="#ffc300">ST. AUGUSTINE</text>
+<circle cx="80" cy="162" r="26" fill="#14213d" stroke="#fff" stroke-width="7"/><circle cx="270" cy="162" r="26" fill="#14213d" stroke="#fff" stroke-width="7"/>
+</g>
+<g transform="translate(560 220)"><circle cx="0" cy="0" r="14" fill="#c98a5e"/><path d="M-16 90 V22 q0-12 16-12 q16 0 16 12 V90z" fill="#2b6cb0"/><rect x="-20" y="30" width="14" height="30" rx="5" fill="#14213d"/></g>
+</svg>

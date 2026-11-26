@@ -1,3 +1,0 @@
-User-agent: *
-Allow: /
-Sitemap: https://campuslift-tt.example.com/sitemap.xml

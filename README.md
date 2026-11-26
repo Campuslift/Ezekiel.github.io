@@ -1,85 +1,95 @@
 # CampusLift TT
 
-Six-page responsive student carpool site for Trinidad and Tobago schools.
-CPTR331 Web Development, Assignment 5.
+My CPTR331 Assignment 5. It's a 6-page carpool website for students in Trinidad and Tobago.
 
-- CDN version: https://darkshadow1451.github.io/Ezekiel.github.io/ (GitHub Pages, served through Fastly)
-- Non-CDN version: https://campuslift.liveblog365.com/ (ProFreeHost, single origin server)
-- Performance report: `performance-report.html`
-- Code: this GitHub repository.
+- With CDN (GitHub Pages, uses Fastly): https://campuslift.github.io/Ezekiel.github.io/
+- Without CDN (ProFreeHost): https://campuslift.liveblog365.com/
 
-## Pages
+## About the site
 
-index, find-ride, offer-ride, safety, about, contact. Every page links to every other page through the main menu. `performance-report.html` is the assignment report and is not part of the site menu.
+- Pages: Home, Find a Ride, Offer a Ride, Safety, About, Contact
+- Built with HTML, CSS, JavaScript, Bootstrap 5.3.3 and Google Fonts
+- Folders: `css`, `js`, `img`, `media` (empty for now)
+- JavaScript: fare calculator, contact form check (form sends to Formspree), backup drawings if a photo is missing
+- Speed: lazy loaded images, `defer` on scripts, image width and height set
+- Accessibility and SEO: semantic tags, alt text, ARIA labels, skip link, focus outline, page titles and descriptions, canonical links, JSON-LD, `robots.txt`, `sitemap.xml`
 
-## Folder structure
+## CDN and caching
 
-- `/css` styles
-- `/js` scripts
-- `/img` images (photos in `/img/photos`, test screenshots in `/img/screenshots`)
-- `/media` media files (none used yet)
+My images, CSS and JS are on GitHub Pages, which uses the Fastly CDN. Bootstrap and the fonts come from CDNs too.
 
-## CDN provider and configuration
+I used ProFreeHost to compare without a CDN. Its CSS and image headers I checked show `openresty` and no CDN headers. The HTML does show Cloudflare, which I think the host added.
 
-The CDN version is hosted on **GitHub Pages**, which delivers files through a global CDN (Fastly). Bootstrap and Google Fonts also load from public CDNs (jsDelivr, Google).
+I added `?v=1.6` to my CSS and JS links. When I change a file, I change the number so the browser gets the new one.
 
-The comparison version runs on **ProFreeHost**, a free shared host with a single origin server. Its HTML responses carry Cloudflare headers added by the host, but its CSS and images are served directly by `openresty` with no CDN headers, so it works as the no-CDN baseline.
+My `_headers` file tells CSS, JS and images to cache for 1 year, and HTML to check for updates every time. GitHub Pages and ProFreeHost both ignore it, so **I couldn't show it working live**. ProFreeHost caches CSS and images for 30 days.
 
-Cache control:
+## Speed test results
 
-- GitHub Pages sets its own cache headers and ignores `_headers`.
-- `_headers` is included for hosts that read it (Netlify, Cloudflare Pages). It sets css, js and img to `public, max-age=31536000, immutable` and html to `public, max-age=0, must-revalidate`.
-- ProFreeHost sends `max-age=2592000` (30 days) on CSS and images.
-- Asset versioning: CSS and JS links end in `?v=1.6`. Change the number when a file changes so browsers fetch the new copy.
+I tested both sites on 26 November 2026 using DebugBear (desktop, US East, same settings). I ran the tests when my GitHub site was at `darkshadow1451.github.io/Ezekiel.github.io/`, before the address changed. That is why the screenshots show the old address.
 
-## Frameworks and libraries
+![Load time chart](img/screenshots/chart-load-times.png)
 
-- Bootstrap 5.3.3 (layout, navbar, forms, utilities)
-- Google Fonts: Bricolage Grotesque and Atkinson Hyperlegible
-- Plain JavaScript (no build step)
+| Test | Without CDN | With CDN |
+| --- | --- | --- |
+| Performance score | 99 | 100 |
+| Time to first byte | 302 ms | 51 ms |
+| First Contentful Paint | 756 ms | 325 ms |
+| Largest Contentful Paint | 876 ms | 369 ms |
+| Speed Index | 0.7 s | 0.3 s |
+| Total Blocking Time | 0 ms | 0 ms |
+| Layout Shift (CLS) | 0.003 | 0.002 |
+| Page size | 529 KB | 389 KB |
 
-## Interactive features (JavaScript)
+The CDN version was faster. It started responding 251 ms sooner and showed the main content in less than half the time. I think a closer server helped, but the CDN might not be the only reason.
 
-- Fare calculator: base fee + rate per km, split between passengers
-- Contact form validation for name, email, address and phone
-- Photos fall back to drawings if an image file is missing
+The test wasn't perfectly fair:
 
-## Performance
+- The main image was 161 KB on ProFreeHost but 103 KB on GitHub Pages.
+- GitHub Pages had version 1.5 files and ProFreeHost had 1.6.
+- ProFreeHost still had Cloudflare on the HTML.
+- I only have one DebugBear result for each site.
+- The two hosts may also have different servers.
 
-- Lazy loading on images below the first screen (`loading="lazy"`)
-- `defer` on all scripts so they do not block the page
-- Width and height set on images to avoid layout jumps
-- Versioned css and js links for cache busting
+## Screenshots
 
-### Results (26 November 2026)
+### Without CDN headers
 
-DebugBear Website Speed Test, US East, desktop, same settings on both sites.
+CSS file:
 
-| Metric                   | Without CDN (ProFreeHost) | With CDN (GitHub Pages) |
-| ------------------------ | ------------------------- | ----------------------- |
-| Lighthouse Performance   | 99                        | 100                     |
-| Time to first byte       | 302 ms                    | 51 ms                   |
-| First Contentful Paint   | 756 ms                    | 325 ms                  |
-| Largest Contentful Paint | 876 ms                    | 369 ms                  |
-| Speed Index              | 0.7 s                     | 0.3 s                   |
-| Total Blocking Time      | 0 ms                      | 0 ms                    |
-| Page weight              | 529 KB                    | 389 KB                  |
+![CSS headers](img/screenshots/headers-nocdn-styles-css.png)
 
-Chrome DevTools Lighthouse on the CDN version: mobile 100 / 100 / 100 / 100 (Performance, Accessibility, Best Practices, SEO); desktop 98 / 100 / 100 / 100.
+Image file:
 
-The full comparison, analysis and limitations are in `performance-report.html`. Screenshots are in `/img/screenshots`.
+![Image headers](img/screenshots/headers-nocdn-hero-image.png)
 
-## Accessibility and SEO
+HTML page:
 
-- Semantic tags: header, nav, main, section, article, footer
-- Skip link, visible focus outline, ARIA labels, `aria-live` fare result, `aria-current` on the active menu link
-- Alt text on every image (empty alt on decorative ones)
-- Unique title, description and canonical link on each page
-- JSON-LD structured data on the home page
-- `robots.txt` and `sitemap.xml` listing all six pages
+![HTML headers](img/screenshots/headers-nocdn-html.png)
 
-## Setup checklist
+### Lighthouse (GitHub Pages)
 
-1. Contact form posts to Formspree (form ID mdegjldd).
-2. Canonical links, `sitemap.xml`, `robots.txt` and the JSON-LD use the GitHub Pages address above.
-3. Add DebugBear screenshots to `img/screenshots/` (see the report's Limitations section for items still to re-test).
+| | Performance | Accessibility | Best Practices | SEO |
+| --- | --- | --- | --- | --- |
+| Mobile | 100 | 100 | 100 | 100 |
+| Desktop | 98 | 100 | 100 | 100 |
+
+Mobile:
+
+![Mobile scores](img/screenshots/lighthouse-cdn-mobile-overview.png)
+
+![Mobile metrics](img/screenshots/lighthouse-cdn-mobile-metrics.png)
+
+Desktop (Lighthouse warned that Chrome extensions affected this run):
+
+![Desktop scores](img/screenshots/lighthouse-cdn-desktop-overview.png)
+
+![Desktop metrics](img/screenshots/lighthouse-cdn-desktop-metrics.png)
+
+I got 74 on an earlier mobile run. Lighthouse said Chrome extensions affected it. A later run got 100.
+
+![74 run](img/screenshots/lighthouse-cdn-mobile-74-run.png)
+
+Accessibility:
+
+![Accessibility score](img/screenshots/lighthouse-cdn-accessibility.png)

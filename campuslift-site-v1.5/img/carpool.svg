@@ -1,0 +1,11 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 400" role="img" aria-label="Four students sharing one car and splitting the fare">
+<rect width="640" height="400" fill="#dff3ea"/>
+<path d="M0 230 L120 140 L220 200 L330 110 L450 205 L560 130 L640 190 V300 H0Z" fill="#a8dcc6"/>
+<rect y="285" width="640" height="115" fill="#14213d"/><path d="M0 340h640" stroke="#ffc300" stroke-width="6" stroke-dasharray="44 26"/>
+<g transform="translate(120 130)"><path d="M10 120 L40 55 Q50 40 70 40 H250 Q272 40 284 58 L330 120 Q350 126 350 150 V160 H0 V140 Q0 124 10 120Z" fill="#d7263d"/>
+<path d="M55 62 H150 V112 H35Z M165 62 H252 L292 112 H165Z" fill="#bcd0e6"/>
+<circle cx="95" cy="82" r="13" fill="#8d5a3b"/><circle cx="125" cy="86" r="12" fill="#c98a5e"/><circle cx="195" cy="82" r="13" fill="#6b4226"/><circle cx="228" cy="88" r="12" fill="#e0ac86"/>
+<circle cx="85" cy="165" r="27" fill="#14213d" stroke="#fff" stroke-width="8"/><circle cx="270" cy="165" r="27" fill="#14213d" stroke="#fff" stroke-width="8"/></g>
+<g transform="translate(430 40)"><rect width="170" height="86" rx="14" fill="#fff" stroke="#ffc300" stroke-width="5"/><text x="85" y="34" text-anchor="middle" font-family="Arial" font-weight="700" font-size="15" fill="#14213d">4 students</text><text x="85" y="68" text-anchor="middle" font-family="Arial" font-weight="800" font-size="28" fill="#1a936f">÷ 4 fare</text></g>
+<path d="M440 130 L470 130" stroke="#ffc300" stroke-width="5"/>
+</svg>

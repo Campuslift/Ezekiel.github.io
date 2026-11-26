@@ -1,0 +1,15 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 400" role="img" aria-label="A student waiting at a roadside in the hot sun while full maxis drive past">
+<rect width="640" height="400" fill="#ffe3a3"/><circle cx="110" cy="80" r="56" fill="#ffc300"/>
+<g stroke="#ffc300" stroke-width="6" stroke-linecap="round"><path d="M110 4v-0M110 -10"/><path d="M30 80h-14M204 80h14M110 160v14M54 24l-10-10M166 24l10-10"/></g>
+<rect y="280" width="640" height="120" fill="#14213d"/><path d="M0 335h640" stroke="#ffc300" stroke-width="6" stroke-dasharray="44 26"/><rect y="272" width="640" height="12" fill="#d9d2c2"/>
+<g transform="translate(330 70)"><rect x="0" y="40" width="250" height="90" rx="18" fill="#fff"/><path d="M0 100h250v16H0z" fill="#ffc300"/>
+<rect x="16" y="54" width="40" height="30" rx="5" fill="#bcd0e6"/><rect x="66" y="54" width="40" height="30" rx="5" fill="#bcd0e6"/><rect x="116" y="54" width="40" height="30" rx="5" fill="#bcd0e6"/><rect x="166" y="54" width="40" height="30" rx="5" fill="#bcd0e6"/>
+<g fill="#14213d"><circle cx="36" cy="66" r="7"/><circle cx="86" cy="66" r="7"/><circle cx="136" cy="66" r="7"/><circle cx="186" cy="66" r="7"/></g>
+<rect x="70" y="10" width="110" height="24" rx="6" fill="#d7263d"/><text x="125" y="27" text-anchor="middle" font-family="Arial" font-weight="700" font-size="14" fill="#fff">FULL</text>
+<circle cx="56" cy="132" r="20" fill="#14213d" stroke="#fff" stroke-width="6"/><circle cx="196" cy="132" r="20" fill="#14213d" stroke="#fff" stroke-width="6"/></g>
+<path d="M300 150h-60M300 175h-90M300 200h-40" stroke="#14213d" stroke-opacity=".25" stroke-width="5" stroke-linecap="round"/>
+<g transform="translate(90 160)"><rect x="0" y="0" width="6" height="120" fill="#14213d"/><rect x="-28" y="-4" width="64" height="34" rx="5" fill="#2b6cb0"/><text x="4" y="19" text-anchor="middle" font-family="Arial" font-weight="700" font-size="12" fill="#fff">MAXI</text></g>
+<g transform="translate(180 130)"><circle cx="0" cy="0" r="17" fill="#8d5a3b"/><path d="M-22 150 V34 q0-14 22-14 q22 0 22 14 V150z" fill="#d7263d"/><rect x="18" y="60" width="26" height="40" rx="6" fill="#14213d"/><path d="M-22 56 l-18 40" stroke="#8d5a3b" stroke-width="9" stroke-linecap="round"/></g>
+<g transform="translate(40 295)"><circle cx="40" cy="40" r="34" fill="#fff" stroke="#14213d" stroke-width="5"/><path d="M40 40V18M40 40l16 10" stroke="#14213d" stroke-width="5" stroke-linecap="round"/></g>
+<text x="320" y="385" text-anchor="middle" font-family="Arial" font-weight="700" font-size="16" fill="#fff">…another full one just passed.</text>
+</svg>

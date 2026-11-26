@@ -1,13 +1,1 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 400" role="img" aria-label="Students heading home from campus at sunset">
-<defs><linearGradient id="dusk" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#2b6cb0"/><stop offset=".6" stop-color="#f4a261"/><stop offset="1" stop-color="#ffc300"/></linearGradient></defs>
-<rect width="640" height="400" fill="url(#dusk)"/><circle cx="470" cy="270" r="60" fill="#ffe08a"/>
-<path d="M0 290 L100 220 L200 270 L320 200 L440 270 L560 215 L640 260 V340 H0Z" fill="#14213d" fill-opacity=".55"/>
-<g fill="#14213d"><rect x="60" y="150" width="260" height="170"/><path d="M60 150 L190 90 L320 150Z"/></g>
-<g fill="#ffc300"><rect x="85" y="180" width="30" height="40"/><rect x="135" y="180" width="30" height="40"/><rect x="215" y="180" width="30" height="40"/><rect x="265" y="180" width="30" height="40"/><rect x="85" y="245" width="30" height="40"/><rect x="265" y="245" width="30" height="40"/></g>
-<rect x="170" y="240" width="40" height="80" fill="#d7263d"/><circle cx="190" cy="140" r="14" fill="#fff"/><path d="M190 140V130M190 140l8 4" stroke="#14213d" stroke-width="3"/>
-<rect y="320" width="640" height="80" fill="#14213d"/>
-<g><circle cx="380" cy="300" r="12" fill="#8d5a3b"/><path d="M366 360V318q0-8 14-8t14 8V360z" fill="#2b6cb0"/>
-<circle cx="425" cy="304" r="12" fill="#c98a5e"/><path d="M411 360V322q0-8 14-8t14 8V360z" fill="#d7263d"/>
-<circle cx="470" cy="300" r="12" fill="#6b4226"/><path d="M456 360V318q0-8 14-8t14 8V360z" fill="#1a936f"/>
-<circle cx="515" cy="304" r="12" fill="#e0ac86"/><path d="M501 360V322q0-8 14-8t14 8V360z" fill="#ffc300"/></g>
-</svg>
+

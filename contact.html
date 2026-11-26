@@ -17,7 +17,7 @@
       href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"
       rel="stylesheet"
     />
-    <link href="css/styles.css?v=1.5" rel="stylesheet" />
+    <link href="css/styles.css?v=1.6" rel="stylesheet" />
   </head>
   <body>
     <a class="visually-hidden-focusable" href="#main">Skip to content</a>
@@ -62,7 +62,7 @@
           <form
             id="contactForm"
             class="panel col-md-7"
-            action="https://formspree.io/f/YOUR_ID"
+            action="https://formspree.io/f/mdegjldd"
             method="post"
             novalidate
           >
@@ -97,9 +97,17 @@
               ><input id="tel" name="tel" type="tel" class="form-control" autocomplete="tel" />
               <div class="invalid-feedback">Enter a phone number, like 868-555-0123.</div>
             </div>
-            <button class="btn btn-go" type="submit">Send message</button>
+            <div class="mb-3">
+              <label class="form-label" for="message">Message</label
+              ><textarea id="message" name="message" rows="4" class="form-control"></textarea>
+              <div class="invalid-feedback">Write a short message (at least 10 characters).</div>
+            </div>
+            <button class="btn btn-go" type="submit" id="sendBtn">Send message</button>
             <p id="sent" class="d-none text-success mt-3" role="status">
-              Message validated. Connect a form handler to send it.
+              Thanks! Your message was sent.
+            </p>
+            <p id="sendError" class="d-none text-danger mt-3" role="alert">
+              Sorry, the message could not be sent. Please try again in a moment.
             </p>
           </form>
         </section>
@@ -130,6 +138,6 @@
       src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
       defer
     ></script>
-    <script src="js/main.js?v=1.5" defer></script>
+    <script src="js/main.js?v=1.6" defer></script>
   </body>
 </html>

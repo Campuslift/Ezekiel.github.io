@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="robots" content="noindex">
+<title>CampusLift TT: CDN performance report</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Atkinson+Hyperlegible:wght@400;700&family=Bricolage+Grotesque:wght@700;800&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#f6f8fb;--card:#fff;--ink:#14213d;--mute:#4a5878;--line:#d9e0ec;--yellow:#ffc300;--blue:#2b6cb0;--green:#1a936f;--red:#d7263d;--nocdn:#8a96b0;--cdn:#1a936f;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#0b1230;--card:#141c40;--ink:#f2f5ff;--mute:#aab5d6;--line:#2a3566;--blue:#7db4f0;--nocdn:#6f7ca3;--cdn:#3cc9a0}}
+:root[data-theme="dark"]{--bg:#0b1230;--card:#141c40;--ink:#f2f5ff;--mute:#aab5d6;--line:#2a3566;--blue:#7db4f0;--nocdn:#6f7ca3;--cdn:#3cc9a0}
+html{scroll-padding-top:env(safe-area-inset-top,0px)}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);font:1.05rem/1.65 "Atkinson Hyperlegible",system-ui,sans-serif}
+.stripe{height:8px;background:linear-gradient(to right,var(--yellow) 25%,var(--red) 25% 50%,var(--green) 50% 75%,var(--blue) 75%)}
+main{max-width:860px;margin:0 auto;padding:2.5rem 1.25rem 4rem}
+h1,h2,h3{font-family:"Bricolage Grotesque",system-ui,sans-serif;font-weight:800;line-height:1.15}
+h1{font-size:clamp(2rem,6vw,3rem);margin:.2rem 0 .6rem}
+h2{font-size:1.6rem;margin:2.8rem 0 .8rem}
+h3{font-size:1.15rem;margin:1.6rem 0 .4rem}
+p,li{max-width:70ch}
+.lead{font-size:1.2rem;color:var(--mute)}
+.meta{color:var(--mute);font-size:.95rem}
+.wrap{overflow-x:auto}
+table{border-collapse:collapse;width:100%;min-width:560px;background:var(--card);border:1px solid var(--line)}
+th,td{padding:.6rem .8rem;text-align:left;border-bottom:1px solid var(--line);vertical-align:top}
+th{font-family:"Bricolage Grotesque",sans-serif;font-weight:700}
+td.n{font-variant-numeric:tabular-nums}
+.win{color:var(--cdn);font-weight:700}
+.chart{background:var(--card);border:1px solid var(--line);padding:1.2rem}
+.row{margin:0 0 1.1rem}.row:last-child{margin:0}
+.lab{font-weight:700;margin-bottom:.3rem}
+.bar{height:2rem;margin:.25rem 0;display:flex;align-items:center;padding:0 .6rem;color:#fff;font-weight:700;font-size:.9rem;min-width:4.2rem}
+.bar.nocdn{background:var(--nocdn)}.bar.cdn{background:var(--cdn);color:#06251c}
+@media (prefers-color-scheme:dark){.bar.nocdn{color:#0b1230}}
+.legend{display:flex;gap:1.4rem;flex-wrap:wrap;margin:0 0 1rem;font-size:.95rem}
+.legend i{display:inline-block;width:.9rem;height:.9rem;margin-right:.4rem;vertical-align:-.1rem}
+.callout{border-left:6px solid var(--yellow);background:var(--card);padding:.9rem 1.1rem;margin:1.2rem 0}
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:1.2rem}
+figure{margin:0;background:var(--card);border:1px solid var(--line);padding:.6rem}
+figure img{display:block;max-width:100%;height:auto}
+figcaption{font-size:.9rem;color:var(--mute);padding:.5rem .2rem .1rem}
+a{color:var(--blue)}
+:focus-visible{outline:3px solid var(--blue);outline-offset:2px}
+code{background:var(--card);border:1px solid var(--line);padding:0 .3rem}
+</style>
+</head>
+<body>
+<div class="stripe"></div>
+<main>
+<p class="meta">CPTR331 Web Development, Assignment 5 &middot; tested 26 November 2026</p>
+<h1>CampusLift TT: how much does a CDN help?</h1>
+<p class="lead">The same site, tested on a plain shared host and on a CDN, loads its main content about 58% faster on the CDN and responds 83% sooner.</p>
+
+<h2>What was compared</h2>
+<div class="wrap"><table>
+<tr><th></th><th>Without CDN</th><th>With CDN</th></tr>
+<tr><th>Host</th><td>ProFreeHost (free shared hosting, single origin server)</td><td>GitHub Pages (served through Fastly&rsquo;s global CDN)</td></tr>
+<tr><th>Address</th><td><code>campuslift.liveblog365.com</code></td><td><code>darkshadow1451.github.io/Ezekiel.github.io</code></td></tr>
+<tr><th>Evidence it is a plain origin</th><td>CSS and images came back with <code>Server: openresty</code> and no CDN headers (see Evidence)</td><td>Edge delivery with a 51 ms first byte from the test location</td></tr>
+</table></div>
+
+<h2>Method</h2>
+<p>Both addresses were tested with the DebugBear Website Speed Test on the same day, with identical settings: US East, 100 Mbps, 2 ms round-trip time, fast device, Chrome 157, Lighthouse 13.5.0, desktop. Accessibility, SEO and Best Practices were measured with Chrome DevTools Lighthouse, because DebugBear&rsquo;s free tool only reports performance.</p>
+
+<h2>Results</h2>
+<div class="chart" role="img" aria-label="Bar chart: time to first byte 302 ms without CDN and 51 ms with CDN; first contentful paint 756 and 325 ms; largest contentful paint 876 and 369 ms">
+<div class="legend"><span><i style="background:var(--nocdn)"></i>Without CDN (ProFreeHost)</span><span><i style="background:var(--cdn)"></i>With CDN (GitHub Pages)</span></div>
+<div class="row"><div class="lab">Time to first byte</div><div class="tracks"><div class="bar nocdn" style="width:33.6%"><span>302 ms</span></div><div class="bar cdn" style="width:5.7%"><span>51 ms</span></div></div></div>
+<div class="row"><div class="lab">First Contentful Paint</div><div class="tracks"><div class="bar nocdn" style="width:84.0%"><span>756 ms</span></div><div class="bar cdn" style="width:36.1%"><span>325 ms</span></div></div></div>
+<div class="row"><div class="lab">Largest Contentful Paint</div><div class="tracks"><div class="bar nocdn" style="width:97.3%"><span>876 ms</span></div><div class="bar cdn" style="width:41.0%"><span>369 ms</span></div></div></div>
+<p class="meta" style="margin:.8rem 0 0">Shorter is better. Bars share one scale, 0 to 900 ms.</p>
+</div>
+
+<div class="wrap" style="margin-top:1.4rem"><table>
+<tr><th>Metric</th><th>Without CDN</th><th>With CDN</th><th>Change</th></tr>
+<tr><td>Lighthouse Performance</td><td class="n">99</td><td class="n">100</td><td class="win">+1</td></tr>
+<tr><td>Time to first byte</td><td class="n">302 ms</td><td class="n">51 ms</td><td class="win">83% faster</td></tr>
+<tr><td>First Contentful Paint</td><td class="n">756 ms</td><td class="n">325 ms</td><td class="win">57% faster</td></tr>
+<tr><td>Largest Contentful Paint</td><td class="n">876 ms</td><td class="n">369 ms</td><td class="win">58% faster</td></tr>
+<tr><td>Speed Index</td><td class="n">0.7 s</td><td class="n">0.3 s</td><td class="win">57% faster</td></tr>
+<tr><td>Total Blocking Time</td><td class="n">0 ms</td><td class="n">0 ms</td><td>no change</td></tr>
+<tr><td>Cumulative Layout Shift</td><td class="n">0.003</td><td class="n">0.002</td><td>negligible</td></tr>
+<tr><td>Page weight</td><td class="n">529 KB</td><td class="n">389 KB</td><td>see limitations</td></tr>
+</table></div>
+
+<h3>Lighthouse category scores (CDN version, Chrome DevTools)</h3>
+<div class="wrap"><table>
+<tr><th>Run</th><th>Performance</th><th>Accessibility</th><th>Best Practices</th><th>SEO</th></tr>
+<tr><td>Mobile</td><td class="n">100</td><td class="n">100</td><td class="n">100</td><td class="n">100</td></tr>
+<tr><td>Desktop</td><td class="n">98</td><td class="n">100</td><td class="n">100</td><td class="n">100</td></tr>
+</table></div>
+<p class="meta">An earlier mobile run scored 74 with 650 ms of blocking time. Lighthouse flagged that browser extensions were slowing that run, and the clean rerun scored 100. Both are kept in the evidence below.</p>
+
+<h2>Why the CDN is faster</h2>
+<ul>
+<li><strong>Shorter distance.</strong> A CDN answers from a server near the visitor, so the first byte arrived in 51 ms instead of 302 ms. Every other metric starts later when the first byte is late, which is why FCP and LCP improved by about the same amount.</li>
+<li><strong>Cached static files.</strong> CSS, JavaScript and images are stored at the edge, so the origin does not have to produce them again for each visit.</li>
+<li><strong>No effect on blocking time or layout shift.</strong> Those depend on the page&rsquo;s own code, which is identical on both hosts, so they stay at or near zero.</li>
+</ul>
+
+<h2>Caching and versioning</h2>
+<p>CSS and JavaScript links end in <code>?v=1.6</code>, so changing the number forces browsers to fetch the new file. The <code>_headers</code> file sets a one-year <code>immutable</code> cache on <code>/css</code>, <code>/js</code> and <code>/img</code>, and revalidation on HTML. GitHub Pages ignores <code>_headers</code>, which is why Lighthouse still reports &ldquo;Use efficient cache lifetimes&rdquo; on the CDN version. ProFreeHost sent its own 30-day <code>max-age</code> on CSS and images instead. Hosts that read <code>_headers</code>, such as Netlify and Cloudflare Pages, would apply the policy as written.</p>
+
+<h2>Limitations</h2>
+<div class="callout">
+<ul>
+<li><strong>The hero image differs.</strong> It was 161 KB on ProFreeHost and 103 KB on GitHub Pages, which accounts for 58 KB of the 140 KB page-weight gap and may account for part of the LCP gap.</li>
+<li><strong>Code versions differ slightly.</strong> The GitHub Pages test loaded <code>?v=1.5</code> files and ProFreeHost loaded <code>?v=1.6</code>.</li>
+<li><strong>The baseline is not a pure no-CDN test.</strong> The HTML on ProFreeHost carried Cloudflare headers (<code>Cf-Ray</code>, status DYNAMIC, no caching) added by the host. The CSS and images carried none, so static files came straight from the origin.</li>
+<li><strong>One run per site.</strong> DebugBear&rsquo;s free test gives a single result, so small differences could be noise. The large TTFB, FCP and LCP gaps are well beyond that.</li>
+<li><strong>Two different hosts.</strong> Server hardware and software also differ, not only CDN presence.</li>
+</ul>
+</div>
+
+<h2>Conclusion</h2>
+<p>The CDN version responded 251 ms sooner and showed its main content more than twice as fast. Both versions already score highly because the site is small, so the gain is clearest in server response and paint timing and does not change the page&rsquo;s code-driven metrics.</p>
+
+<h2>Evidence</h2>
+<h3>Response headers on the non-CDN host</h3>
+<div class="grid">
+<figure><a href="img/screenshots/headers-nocdn-html.png"><img src="img/screenshots/headers-nocdn-html.png" alt="HTML response on ProFreeHost: no-store, no-cache, with a Cloudflare layer added by the host" loading="lazy"></a><figcaption>HTML response on ProFreeHost: no-store, no-cache, with a Cloudflare layer added by the host</figcaption></figure>
+<figure><a href="img/screenshots/headers-nocdn-html-server.png"><img src="img/screenshots/headers-nocdn-html-server.png" alt="Same response, lower half: Server cloudflare and a PHPSESSID cookie" loading="lazy"></a><figcaption>Same response, lower half: Server cloudflare and a PHPSESSID cookie</figcaption></figure>
+<figure><a href="img/screenshots/headers-nocdn-styles-css.png"><img src="img/screenshots/headers-nocdn-styles-css.png" alt="styles.css on ProFreeHost: Server openresty, 30-day max-age, no CDN headers" loading="lazy"></a><figcaption>styles.css on ProFreeHost: Server openresty, 30-day max-age, no CDN headers</figcaption></figure>
+<figure><a href="img/screenshots/headers-nocdn-hero-jpg.png"><img src="img/screenshots/headers-nocdn-hero-jpg.png" alt="hero-students.jpg on ProFreeHost: Server openresty, 165,025 bytes" loading="lazy"></a><figcaption>hero-students.jpg on ProFreeHost: Server openresty, 165,025 bytes</figcaption></figure>
+</div>
+<h3>Lighthouse, CDN version</h3>
+<div class="grid">
+<figure><a href="img/screenshots/lighthouse-cdn-mobile-overview.png"><img src="img/screenshots/lighthouse-cdn-mobile-overview.png" alt="Mobile run: Performance, Accessibility, Best Practices and SEO all 100" loading="lazy"></a><figcaption>Mobile run: Performance, Accessibility, Best Practices and SEO all 100</figcaption></figure>
+<figure><a href="img/screenshots/lighthouse-cdn-mobile-metrics.png"><img src="img/screenshots/lighthouse-cdn-mobile-metrics.png" alt="Mobile metrics: FCP 0.6 s, LCP 0.6 s, TBT 0 ms, CLS 0" loading="lazy"></a><figcaption>Mobile metrics: FCP 0.6 s, LCP 0.6 s, TBT 0 ms, CLS 0</figcaption></figure>
+<figure><a href="img/screenshots/lighthouse-cdn-mobile-insights.png"><img src="img/screenshots/lighthouse-cdn-mobile-insights.png" alt="Mobile insights: render-blocking requests and cache lifetimes" loading="lazy"></a><figcaption>Mobile insights: render-blocking requests and cache lifetimes</figcaption></figure>
+<figure><a href="img/screenshots/lighthouse-cdn-desktop-overview.png"><img src="img/screenshots/lighthouse-cdn-desktop-overview.png" alt="Desktop run: 98, 100, 100, 100 (extensions warning shown by Lighthouse)" loading="lazy"></a><figcaption>Desktop run: 98, 100, 100, 100 (extensions warning shown by Lighthouse)</figcaption></figure>
+<figure><a href="img/screenshots/lighthouse-cdn-desktop-metrics.png"><img src="img/screenshots/lighthouse-cdn-desktop-metrics.png" alt="Desktop metrics: FCP 0.7 s, LCP 0.8 s, TBT 110 ms, CLS 0.031" loading="lazy"></a><figcaption>Desktop metrics: FCP 0.7 s, LCP 0.8 s, TBT 110 ms, CLS 0.031</figcaption></figure>
+<figure><a href="img/screenshots/lighthouse-cdn-desktop-insights.png"><img src="img/screenshots/lighthouse-cdn-desktop-insights.png" alt="Desktop insights and diagnostics" loading="lazy"></a><figcaption>Desktop insights and diagnostics</figcaption></figure>
+<figure><a href="img/screenshots/lighthouse-cdn-accessibility.png"><img src="img/screenshots/lighthouse-cdn-accessibility.png" alt="Accessibility category: 100, with manual checks listed" loading="lazy"></a><figcaption>Accessibility category: 100, with manual checks listed</figcaption></figure>
+<figure><a href="img/screenshots/lighthouse-cdn-mobile-extensions-run-overview.png"><img src="img/screenshots/lighthouse-cdn-mobile-extensions-run-overview.png" alt="Earlier mobile run scoring 74: Lighthouse warned that extensions affected it" loading="lazy"></a><figcaption>Earlier mobile run scoring 74: Lighthouse warned that extensions affected it</figcaption></figure>
+<figure><a href="img/screenshots/lighthouse-cdn-mobile-extensions-run-metrics.png"><img src="img/screenshots/lighthouse-cdn-mobile-extensions-run-metrics.png" alt="Earlier mobile run metrics: TBT 650 ms" loading="lazy"></a><figcaption>Earlier mobile run metrics: TBT 650 ms</figcaption></figure>
+</div>
+</main>
+</body>
+</html>

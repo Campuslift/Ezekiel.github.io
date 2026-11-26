@@ -6,12 +6,14 @@
   --red: #d7263d;
   --green: #1a936f;
   --blue: #2b6cb0;
+  --glow: #ffd24a;
+  --night: #0b1230;
 }
 
 /* page basics */
 body {
-  background: var(--bg);
-  color: var(--ink);
+  background-color: var(--night);
+  color: #f2f5ff;
   font-family: "Atkinson Hyperlegible", sans-serif;
   line-height: 1.65;
 }
@@ -34,8 +36,63 @@ section {
 }
 
 :focus-visible {
-  outline: 3px solid var(--blue);
+  outline: 3px solid var(--glow);
   outline-offset: 2px;
+}
+
+.panel :focus-visible,
+.stat :focus-visible,
+.where-card :focus-visible,
+.card-photo :focus-visible {
+  outline-color: var(--blue);
+}
+
+/* night-sky background: soft colour glows and floating sparks, no image files */
+body::before,
+body::after {
+  content: "";
+  inset: 0;
+  pointer-events: none;
+  position: fixed;
+  z-index: -1;
+}
+
+body::before {
+  background:
+    radial-gradient(circle at 12% 8%, rgba(255, 195, 0, 0.32), transparent 38%),
+    radial-gradient(circle at 88% 22%, rgba(215, 38, 61, 0.3), transparent 36%),
+    radial-gradient(circle at 75% 88%, rgba(43, 108, 176, 0.5), transparent 46%),
+    radial-gradient(circle at 8% 85%, rgba(26, 147, 111, 0.32), transparent 40%),
+    linear-gradient(160deg, #0b1230 0%, #1b1445 55%, #2a1740 100%);
+}
+
+body::after {
+  background-image:
+    radial-gradient(circle, rgba(255, 210, 74, 0.9) 0 1.5px, transparent 2.5px),
+    radial-gradient(circle, rgba(255, 120, 90, 0.8) 0 1.5px, transparent 2.5px),
+    radial-gradient(circle, rgba(140, 200, 255, 0.8) 0 1px, transparent 2px);
+  background-position: 0 0, 47px 71px, 90px 30px;
+  background-size: 130px 130px, 190px 190px, 110px 110px;
+  opacity: 0.35;
+}
+
+/* skip link must stay readable when it appears */
+.visually-hidden-focusable:focus {
+  background: white;
+  color: var(--ink);
+  padding: 0.5rem 1rem;
+}
+
+/* links on the dark background */
+a {
+  color: var(--glow);
+}
+
+.panel a,
+.stat a,
+.where-card a,
+.card-photo a {
+  color: var(--blue);
 }
 
 /* coloured bar at the very top */
@@ -54,8 +111,26 @@ section {
 
 /* menu */
 .navbar {
-  background: white;
-  border-bottom: 1px solid #dde4ee;
+  backdrop-filter: blur(8px);
+  background: rgba(11, 18, 48, 0.78);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.15);
+}
+
+.navbar .navbar-brand,
+.navbar .nav-link {
+  color: #f2f5ff;
+}
+
+.navbar .nav-link:hover {
+  color: var(--glow);
+}
+
+.navbar-toggler {
+  border-color: rgba(255, 255, 255, 0.6);
+}
+
+.navbar-toggler-icon {
+  filter: invert(1);
 }
 
 .nav-link.active {
@@ -65,7 +140,7 @@ section {
 
 /* footer */
 footer {
-  background: var(--ink);
+  background: rgba(8, 12, 32, 0.85);
   color: white;
   margin-top: 3rem;
   padding: 2rem 0;
@@ -90,7 +165,7 @@ footer a {
 
 /* small blue heading above the title */
 .eyebrow {
-  color: var(--blue);
+  color: #8cc8ff;
   font-size: 0.8rem;
   font-weight: 700;
   text-transform: uppercase;
@@ -99,6 +174,7 @@ footer a {
 /* white box with a coloured edge */
 .panel {
   background: white;
+  color: var(--ink);
   border-left: 6px solid var(--yellow);
   border-radius: 8px;
   padding: 1.5rem;
@@ -119,6 +195,7 @@ footer a {
 /* big number boxes */
 .stat {
   background: white;
+  color: var(--ink);
   border-bottom: 4px solid var(--yellow);
   border-radius: 10px;
   height: 100%;
@@ -148,6 +225,7 @@ footer a {
 /* card with a photo on top */
 .card-photo {
   background: white;
+  color: var(--ink);
   border-radius: 14px;
   box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
   overflow: hidden;
@@ -187,6 +265,7 @@ footer a {
 
 .where-card {
   background: white;
+  color: var(--ink);
   border-radius: 14px;
   border-top: 6px solid var(--yellow);
   box-shadow: 0 6px 20px rgba(0, 0, 0, 0.12);

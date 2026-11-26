@@ -60,6 +60,7 @@ var rules = {
   email: /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/,
   address: /^.{8,120}$/,
   tel: /^\+?[0-9\s()-]{7,16}$/,
+  message: /^[\s\S]{10,1000}$/,
 };
 
 if (contactForm) {
@@ -77,14 +78,40 @@ if (contactForm) {
       }
     }
 
-    if (allGood) {
-      document.getElementById("sent").classList.remove("d-none");
-      contactForm.reset();
-      var ticks = contactForm.querySelectorAll(".is-valid");
-      for (var j = 0; j < ticks.length; j++) {
-        ticks[j].classList.remove("is-valid");
-      }
+    if (!allGood) {
+      return;
     }
+
+    var sendBtn = document.getElementById("sendBtn");
+    var sent = document.getElementById("sent");
+    var sendError = document.getElementById("sendError");
+    sent.classList.add("d-none");
+    sendError.classList.add("d-none");
+    sendBtn.disabled = true;
+
+    // Send the checked form to Formspree
+    fetch(contactForm.action, {
+      method: "POST",
+      body: new FormData(contactForm),
+      headers: { Accept: "application/json" },
+    })
+      .then(function (response) {
+        if (!response.ok) {
+          throw new Error("Send failed");
+        }
+        sent.classList.remove("d-none");
+        contactForm.reset();
+        var ticks = contactForm.querySelectorAll(".is-valid");
+        for (var j = 0; j < ticks.length; j++) {
+          ticks[j].classList.remove("is-valid");
+        }
+      })
+      .catch(function () {
+        sendError.classList.remove("d-none");
+      })
+      .then(function () {
+        sendBtn.disabled = false;
+      });
   });
 }
 
